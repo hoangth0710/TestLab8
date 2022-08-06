@@ -88,8 +88,28 @@ router.post('/updateConfirm', async function (req, res) {
 
 })
 
+router.post('/createUser', async function (req, res) {
+    var name = req.body.name;
+    var age = req.body.age;
+    var address = req.body.address;
+
+    const SV = mongoose.model('students', SinhVien);
+    const sinhVien = new SV({
+        name: name,
+        age: age,
+        address: address
+    })
+    await sinhVien.save();
+
+    res.send({
+        statusCode : 200,
+        message : 'Thang Cong!!!'
+    });
+
+})
 
 router.get('/getUsers', function (req, res) {
+
     const sinhVienList = mongoose.model('students', SinhVien);
 
     sinhVienList.find({}, function (error, result) {
@@ -97,5 +117,23 @@ router.get('/getUsers', function (req, res) {
     })
 })
 
+router.post('createStudent', function (req, res) {
+    var name = req.body.name;
+    var age = req.body.age;
+    var address = req.body.address;
+
+    // truy van va them sinh vien
+
+    // thanh cong
+    res.send({
+        statusCode: 200,
+        message: 'Thanh Cong'
+    });
+
+})
+
 
 module.exports = router;
+
+
+
